@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 /*
  * Calculates Precision and Recal for each class in a multiclass confusion matrix
  * 
@@ -37,7 +39,6 @@ public class ScoreCalculator {
 						result[curRow][0]+=sourceData[curRow][curColumn];
 						result[curColumn][1]+=sourceData[curRow][curColumn];
 				}
-				//result[curRow][1]+=sourceData[curRow][curColumn];
 				classIndex++;
 				System.out.println("");
 		}
@@ -47,10 +48,11 @@ public class ScoreCalculator {
 		}
 		//Print Precision and recall
 		System.out.println("\n"+"Class, Precision, Recal");
+		DecimalFormat df = new DecimalFormat("#.##");
 		for(int i=0;i <numClasses;i++) {
 			double precision = (double)(tpArr[i])/(double)(result[i][0]);
 			double recal = (double)(tpArr[i]/(double)result[i][1]);
-			System.out.println(i+": precision:"+precision+" recal:"+recal);
+			System.out.println(i+": precision:"+df.format(precision)+" recal:"+df.format(recal));
 		}
 	}
 }
